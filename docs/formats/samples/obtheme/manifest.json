@@ -1,0 +1,15 @@
+{
+  "format": "obtheme",
+  "version": 1,
+  "name": "Obscura Noire",
+  "creator": "Obscura Linux",
+  "assets": {
+    "wallpaper": "obscura-hero.png",
+    "login_wallpaper": "obscura-login.png",
+    "logo": "obscura-sigil.png"
+  },
+  "colors": {
+    "primary": "#7C3AED",
+    "secondary": "#00FFD1"
+  }
+}

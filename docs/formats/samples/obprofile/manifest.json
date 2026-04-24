@@ -1,0 +1,11 @@
+{
+  "format": "obprofile",
+  "version": 1,
+  "name": "obscura-gaming",
+  "role": "gaming",
+  "selected_packages": [
+    "wine-vanilla",
+    "protontricks",
+    "vkd3d-proton"
+  ]
+}

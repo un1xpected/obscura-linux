@@ -9,6 +9,10 @@ Usage:
   obfmt inspect <file>
   obfmt validate <file>
   obfmt mime <file>
+  obfmt pack <src_dir> <out_file>
+  obfmt unpack <bundle> <dest_dir>
+  obfmt sign <file>
+  obfmt verify <file>
   obfmt help
 
 Supported extensions:
@@ -63,10 +67,7 @@ mime_for_format() {
 
 inspect_file() {
   local file="$1"
-  if [[ ! -f "$file" ]]; then
-    echo "File not found: $file"
-    exit 1
-  fi
+  [[ -f "$file" ]] || { echo "File not found: $file"; exit 1; }
 
   local ext
   ext="$(detect_format_from_ext "$file")"
@@ -94,11 +95,7 @@ inspect_file() {
 
 validate_file() {
   local file="$1"
-
-  if [[ ! -f "$file" ]]; then
-    echo "File not found: $file"
-    exit 1
-  fi
+  [[ -f "$file" ]] || { echo "File not found: $file"; exit 1; }
 
   if [[ "${file##*.}" == "json" ]]; then
     python3 - <<PY "$file"
@@ -121,10 +118,7 @@ PY
 
 mime_file() {
   local file="$1"
-  if [[ ! -f "$file" ]]; then
-    echo "File not found: $file"
-    exit 1
-  fi
+  [[ -f "$file" ]] || { echo "File not found: $file"; exit 1; }
 
   local ext
   ext="$(detect_format_from_ext "$file")"
@@ -143,6 +137,49 @@ mime_file() {
   echo "$(mime_for_format "$ext")"
 }
 
+pack_file() {
+  local src="$1"
+  local out="$2"
+
+  [[ -d "$src" ]] || { echo "Source directory not found: $src"; exit 1; }
+
+  if [[ ! -f "$src/manifest.json" ]]; then
+    echo "Missing manifest.json in: $src"
+    exit 1
+  fi
+
+  mkdir -p "$(dirname "$out")"
+  tar --zstd -cf "$out" -C "$src" .
+  echo "Packed: $out"
+}
+
+unpack_file() {
+  local bundle="$1"
+  local dest="$2"
+
+  [[ -f "$bundle" ]] || { echo "Bundle not found: $bundle"; exit 1; }
+
+  mkdir -p "$dest"
+  tar --zstd -xf "$bundle" -C "$dest"
+  echo "Unpacked to: $dest"
+}
+
+sign_file() {
+  local file="$1"
+  [[ -f "$file" ]] || { echo "File not found: $file"; exit 1; }
+
+  gpg --armor --detach-sign --output "${file}.asc" "$file"
+  echo "Signed: ${file}.asc"
+}
+
+verify_file() {
+  local file="$1"
+  [[ -f "$file" ]] || { echo "File not found: $file"; exit 1; }
+  [[ -f "${file}.asc" ]] || { echo "Signature not found: ${file}.asc"; exit 1; }
+
+  gpg --verify "${file}.asc" "$file"
+}
+
 cmd="${1:-help}"
 
 case "$cmd" in
@@ -157,6 +194,22 @@ case "$cmd" in
   mime)
     [[ $# -ge 2 ]] || { echo "Missing file"; exit 1; }
     mime_file "$2"
+    ;;
+  pack)
+    [[ $# -ge 3 ]] || { echo "Usage: obfmt pack <src_dir> <out_file>"; exit 1; }
+    pack_file "$2" "$3"
+    ;;
+  unpack)
+    [[ $# -ge 3 ]] || { echo "Usage: obfmt unpack <bundle> <dest_dir>"; exit 1; }
+    unpack_file "$2" "$3"
+    ;;
+  sign)
+    [[ $# -ge 2 ]] || { echo "Missing file"; exit 1; }
+    sign_file "$2"
+    ;;
+  verify)
+    [[ $# -ge 2 ]] || { echo "Missing file"; exit 1; }
+    verify_file "$2"
     ;;
   help|-h|--help)
     show_help
