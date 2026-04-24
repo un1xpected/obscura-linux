@@ -1,0 +1,16 @@
+{
+  "format": "oblab",
+  "version": 1,
+  "name": "Obscura Web Recon Lab",
+  "created": "2026-04-25T00:00:00Z",
+  "scenario": "basic-web-recon",
+  "toolset": [
+    "nmap",
+    "wireshark",
+    "httpx",
+    "nuclei"
+  ],
+  "notes": [
+    "Use only on systems you own or have permission to test."
+  ]
+}

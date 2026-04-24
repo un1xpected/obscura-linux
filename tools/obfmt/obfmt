@@ -1,0 +1,169 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+show_help() {
+  cat << 'HELP'
+Obscura Format Tool (obfmt)
+
+Usage:
+  obfmt inspect <file>
+  obfmt validate <file>
+  obfmt mime <file>
+  obfmt help
+
+Supported extensions:
+  .obcfg
+  .obtheme
+  .oblab
+  .obpack
+  .obprofile
+  .json (if it contains a "format" field)
+HELP
+}
+
+detect_format_from_ext() {
+  local file="$1"
+  case "${file##*.}" in
+    obcfg)     echo "obcfg" ;;
+    obtheme)   echo "obtheme" ;;
+    oblab)     echo "oblab" ;;
+    obpack)    echo "obpack" ;;
+    obprofile) echo "obprofile" ;;
+    json)      echo "json" ;;
+    *)         echo "" ;;
+  esac
+}
+
+detect_format_from_json() {
+  local file="$1"
+  python3 - <<PY "$file"
+import json, sys
+path = sys.argv[1]
+try:
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    fmt = data.get("format", "")
+    if isinstance(fmt, str) and fmt:
+        print(fmt)
+except Exception:
+    pass
+PY
+}
+
+mime_for_format() {
+  case "$1" in
+    obcfg)     echo "application/vnd.obscura.cfg" ;;
+    obtheme)   echo "application/vnd.obscura.theme" ;;
+    oblab)     echo "application/vnd.obscura.lab" ;;
+    obpack)    echo "application/vnd.obscura.pack" ;;
+    obprofile) echo "application/vnd.obscura.profile" ;;
+    *)         echo "application/octet-stream" ;;
+  esac
+}
+
+inspect_file() {
+  local file="$1"
+  if [[ ! -f "$file" ]]; then
+    echo "File not found: $file"
+    exit 1
+  fi
+
+  local ext
+  ext="$(detect_format_from_ext "$file")"
+
+  if [[ "$ext" == "json" ]]; then
+    local fmt
+    fmt="$(detect_format_from_json "$file")"
+    if [[ -n "$fmt" ]]; then
+      echo "Type: Obscura ${fmt^^} Bundle (from JSON manifest)"
+      return 0
+    fi
+    echo "Unknown JSON manifest: $file"
+    exit 1
+  fi
+
+  case "$ext" in
+    obcfg)     echo "Type: Obscura Config Bundle (.obcfg)" ;;
+    obtheme)   echo "Type: Obscura Theme Bundle (.obtheme)" ;;
+    oblab)     echo "Type: Obscura Lab Bundle (.oblab)" ;;
+    obpack)    echo "Type: Obscura Package Bundle (.obpack)" ;;
+    obprofile) echo "Type: Obscura Profile Bundle (.obprofile)" ;;
+    *)         echo "Unknown Obscura file type: $file" ; exit 1 ;;
+  esac
+}
+
+validate_file() {
+  local file="$1"
+
+  if [[ ! -f "$file" ]]; then
+    echo "File not found: $file"
+    exit 1
+  fi
+
+  if [[ "${file##*.}" == "json" ]]; then
+    python3 - <<PY "$file"
+import json, sys
+path = sys.argv[1]
+with open(path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+fmt = data.get("format")
+if not fmt or not isinstance(fmt, str):
+    print("Invalid JSON manifest: missing 'format'")
+    sys.exit(1)
+print(f"Valid JSON manifest for format: {fmt}")
+PY
+    return 0
+  fi
+
+  echo "Validation placeholder: $file"
+  echo "TODO: schema verification, signature verification, mime mapping"
+}
+
+mime_file() {
+  local file="$1"
+  if [[ ! -f "$file" ]]; then
+    echo "File not found: $file"
+    exit 1
+  fi
+
+  local ext
+  ext="$(detect_format_from_ext "$file")"
+
+  if [[ "$ext" == "json" ]]; then
+    local fmt
+    fmt="$(detect_format_from_json "$file")"
+    if [[ -n "$fmt" ]]; then
+      echo "$(mime_for_format "$fmt")"
+      return 0
+    fi
+    echo "application/octet-stream"
+    return 0
+  fi
+
+  echo "$(mime_for_format "$ext")"
+}
+
+cmd="${1:-help}"
+
+case "$cmd" in
+  inspect)
+    [[ $# -ge 2 ]] || { echo "Missing file"; exit 1; }
+    inspect_file "$2"
+    ;;
+  validate)
+    [[ $# -ge 2 ]] || { echo "Missing file"; exit 1; }
+    validate_file "$2"
+    ;;
+  mime)
+    [[ $# -ge 2 ]] || { echo "Missing file"; exit 1; }
+    mime_file "$2"
+    ;;
+  help|-h|--help)
+    show_help
+    ;;
+  *)
+    echo "Unknown command: $cmd"
+    show_help
+    exit 1
+    ;;
+esac

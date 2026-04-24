@@ -1,0 +1,13 @@
+{
+  "format": "obpack",
+  "version": 1,
+  "name": "Obscura Security Base Pack",
+  "created": "2026-04-25T00:00:00Z",
+  "packages": [
+    "nmap",
+    "tcpdump",
+    "wireshark",
+    "gnupg"
+  ],
+  "signature_required": true
+}
