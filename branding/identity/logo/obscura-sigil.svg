@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#00FFD1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="transparent"/>
+
+  <circle cx="512" cy="512" r="340" fill="none" stroke="url(#ring)" stroke-width="18" opacity="0.95"/>
+  <circle cx="512" cy="512" r="250" fill="none" stroke="#262B3A" stroke-width="8" opacity="0.85"/>
+
+  <path d="M512 286 L708 512 L512 738 L316 512 Z"
+        fill="none" stroke="#E8E8E8" stroke-width="20" stroke-linejoin="round"/>
+
+  <path d="M512 368 L617 512 L512 656 L407 512 Z"
+        fill="none" stroke="#00FFD1" stroke-width="12" stroke-linejoin="round" opacity="0.85"/>
+
+  <path d="M512 320 L512 704" stroke="#7C3AED" stroke-width="10" stroke-linecap="round" opacity="0.45"/>
+  <path d="M320 512 L704 512" stroke="#7C3AED" stroke-width="10" stroke-linecap="round" opacity="0.45"/>
+</svg>

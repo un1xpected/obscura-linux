@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2560 1440" width="2560" height="1440">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#171A22"/>
+      <stop offset="45%" stop-color="#0F1117"/>
+      <stop offset="75%" stop-color="#0B0C10"/>
+      <stop offset="100%" stop-color="#07080B"/>
+    </radialGradient>
+
+    <radialGradient id="halo" cx="50%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.28"/>
+      <stop offset="55%" stop-color="#7C3AED" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#00FFD1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="2560" height="1440" fill="#0B0C10"/>
+  <rect width="2560" height="1440" fill="url(#bgGlow)"/>
+  <circle cx="1280" cy="660" r="430" fill="url(#halo)"/>
+
+  <circle cx="1280" cy="660" r="310" fill="none" stroke="url(#ring)" stroke-width="2.5" opacity="0.26"/>
+  <circle cx="1280" cy="660" r="225" fill="none" stroke="#262B3A" stroke-width="1.5" opacity="0.8"/>
+
+  <path d="M1280 450 L1450 660 L1280 870 L1110 660 Z"
+        fill="none" stroke="#E8E8E8" stroke-width="20" stroke-linejoin="round" opacity="0.86"/>
+
+  <path d="M1280 520 L1375 660 L1280 800 L1185 660 Z"
+        fill="none" stroke="#00FFD1" stroke-width="12" stroke-linejoin="round" opacity="0.75"/>
+
+  <text x="1280" y="1110"
+        text-anchor="middle"
+        fill="#E8E8E8"
+        font-family="Inter, Noto Sans, sans-serif"
+        font-size="42"
+        font-weight="600"
+        letter-spacing="10"
+        opacity="0.86">OBSCURA LINUX</text>
+
+  <text x="1280" y="1168"
+        text-anchor="middle"
+        fill="#A8A8A8"
+        font-family="JetBrains Mono, monospace"
+        font-size="18"
+        letter-spacing="6"
+        opacity="0.75">SILENT • PRECISE • READY</text>
+</svg>

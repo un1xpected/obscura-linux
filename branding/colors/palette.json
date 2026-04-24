@@ -1,0 +1,25 @@
+{
+  "name": "Obscura Noire",
+  "version": "1.0",
+  "description": "Official Obscura Linux visual palette",
+  "base": {
+    "bg": "#0B0C10",
+    "surface_1": "#12141B",
+    "surface_2": "#171A22",
+    "surface_3": "#1E2230",
+    "border": "#262B3A"
+  },
+  "accent": {
+    "primary": "#7C3AED",
+    "secondary": "#00FFD1",
+    "danger": "#FF3366",
+    "warning": "#FFB020",
+    "success": "#35D07F"
+  },
+  "text": {
+    "primary": "#E8E8E8",
+    "secondary": "#A8A8A8",
+    "muted": "#707070",
+    "inverse": "#0B0C10"
+  }
+}

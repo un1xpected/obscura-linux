@@ -1,0 +1,41 @@
+set $mod Mod4
+set $term foot
+set $menu wofi --show drun
+set $lock swaylock -f -c 0B0C10
+
+set $bg #0B0C10
+set $surface #12141B
+set $surface2 #171A22
+set $border #262B3A
+set $accent #7C3AED
+set $cyan #00FFD1
+set $text #E8E8E8
+set $dim #A8A8A8
+set $danger #FF3366
+
+font pango:Inter 10
+
+gaps inner 10
+gaps outer 8
+
+default_border pixel 1
+default_floating_border pixel 1
+focus_follows_mouse yes
+
+client.focused          #7C3AED #7C3AED #E8E8E8 #7C3AED #7C3AED
+client.focused_inactive #171A22 #171A22 #A8A8A8 #171A22 #171A22
+client.unfocused        #12141B #12141B #707070 #12141B #12141B
+client.urgent           #FF3366 #FF3366 #E8E8E8 #FF3366 #FF3366
+
+bindsym $mod+Return exec $term
+bindsym $mod+d exec $menu
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+e exec swaymsg exit
+bindsym $mod+Shift+l exec $lock
+
+bindsym Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%F_%H-%M-%S).png
+
+exec_always sh -c 'pkill swaybg || true; swaybg -i /usr/share/backgrounds/obscura/obscura-hero.svg -m fill'
+exec_always waybar
+exec_always mako
+exec_always dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE GTK_THEME XCURSOR_THEME XCURSOR_SIZE

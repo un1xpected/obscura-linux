@@ -1,0 +1,27 @@
+#!/bin/sh
+set -eu
+
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=Obscura
+export XDG_SESSION_DESKTOP=Obscura
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
+export SDL_VIDEODRIVER=wayland
+export ELECTRON_OZONE_PLATFORM_HINT=auto
+export WLR_NO_HARDWARE_CURSORS=1
+export GTK_THEME=Adwaita:dark
+export XCURSOR_THEME=Bibata-Modern-Ice
+export XCURSOR_SIZE=24
+
+pgrep -x pipewire >/dev/null 2>&1 || pipewire >/tmp/obscura-pipewire.log 2>&1 &
+pgrep -x wireplumber >/dev/null 2>&1 || wireplumber >/tmp/obscura-wireplumber.log 2>&1 &
+
+dbus-update-activation-environment --systemd \
+  WAYLAND_DISPLAY \
+  XDG_CURRENT_DESKTOP \
+  XDG_SESSION_TYPE \
+  GTK_THEME \
+  XCURSOR_THEME \
+  XCURSOR_SIZE
+
+exec sway -c /etc/sway/config

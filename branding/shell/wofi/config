@@ -1,0 +1,10 @@
+show=drun
+prompt=Search Obscura
+width=620
+height=420
+location=center
+allow_images=true
+allow_markup=true
+insensitive=true
+dynamic_lines=true
+hide_scroll=true
