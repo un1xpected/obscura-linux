@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Obscura Theme Manager
+Comment=Inspect Obscura theme bundles
+Exec=foot -e /usr/local/bin/obfmt inspect %f
+Icon=obscura-theme
+Terminal=false
+NoDisplay=true
+MimeType=application/vnd.obscura.theme;
+Categories=Settings;Utility;

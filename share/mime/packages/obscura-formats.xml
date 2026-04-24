@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+
+  <mime-type type="application/vnd.obscura.cfg">
+    <comment>Obscura Configuration Bundle</comment>
+    <glob pattern="*.obcfg"/>
+    <icon name="obscura-cfg"/>
+  </mime-type>
+
+  <mime-type type="application/vnd.obscura.theme">
+    <comment>Obscura Theme Bundle</comment>
+    <glob pattern="*.obtheme"/>
+    <icon name="obscura-theme"/>
+  </mime-type>
+
+  <mime-type type="application/vnd.obscura.lab">
+    <comment>Obscura Lab Bundle</comment>
+    <glob pattern="*.oblab"/>
+    <icon name="obscura-lab"/>
+  </mime-type>
+
+  <mime-type type="application/vnd.obscura.pack">
+    <comment>Obscura Package Bundle</comment>
+    <glob pattern="*.obpack"/>
+    <icon name="obscura-pack"/>
+  </mime-type>
+
+  <mime-type type="application/vnd.obscura.profile">
+    <comment>Obscura Profile Bundle</comment>
+    <glob pattern="*.obprofile"/>
+    <icon name="obscura-profile"/>
+  </mime-type>
+
+</mime-info>

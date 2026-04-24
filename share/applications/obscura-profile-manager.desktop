@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Obscura Profile Manager
+Comment=Inspect Obscura profile bundles
+Exec=foot -e /usr/local/bin/obfmt inspect %f
+Icon=obscura-profile
+Terminal=false
+NoDisplay=true
+MimeType=application/vnd.obscura.profile;
+Categories=System;Settings;

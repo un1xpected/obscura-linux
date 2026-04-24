@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Obscura Lab Runner
+Comment=Inspect Obscura lab bundles
+Exec=foot -e /usr/local/bin/obfmt inspect %f
+Icon=obscura-lab
+Terminal=false
+NoDisplay=true
+MimeType=application/vnd.obscura.lab;
+Categories=Education;Security;

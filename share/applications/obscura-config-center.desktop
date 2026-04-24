@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Obscura Config Center
+Comment=Inspect Obscura configuration bundles
+Exec=foot -e /usr/local/bin/obfmt inspect %f
+Icon=obscura-cfg
+Terminal=false
+NoDisplay=true
+MimeType=application/vnd.obscura.cfg;
+Categories=System;Utility;

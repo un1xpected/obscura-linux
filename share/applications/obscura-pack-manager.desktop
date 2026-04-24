@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Obscura Pack Manager
+Comment=Inspect Obscura package bundles
+Exec=foot -e /usr/local/bin/obfmt inspect %f
+Icon=obscura-pack
+Terminal=false
+NoDisplay=true
+MimeType=application/vnd.obscura.pack;
+Categories=System;PackageManager;
