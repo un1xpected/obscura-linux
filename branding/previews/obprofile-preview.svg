@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#0B0C10"/>
+  <text x="640" y="160" text-anchor="middle" fill="#E8E8E8" font-family="Inter, sans-serif" font-size="44" font-weight="600">Obscura Gaming Profile</text>
+  <text x="640" y="215" text-anchor="middle" fill="#A8A8A8" font-family="JetBrains Mono, monospace" font-size="20">Profile Preview</text>
+  <rect x="220" y="270" width="840" height="250" rx="28" fill="#12141B" stroke="#262B3A"/>
+  <rect x="260" y="310" width="220" height="170" rx="20" fill="#171A22" stroke="#00FFD1"/>
+  <rect x="520" y="310" width="470" height="24" rx="12" fill="#7C3AED"/>
+  <rect x="520" y="350" width="300" height="16" rx="8" fill="#A8A8A8" opacity="0.7"/>
+  <rect x="520" y="380" width="380" height="16" rx="8" fill="#A8A8A8" opacity="0.45"/>
+  <rect x="520" y="430" width="150" height="38" rx="19" fill="#7C3AED"/>
+  <rect x="690" y="430" width="150" height="38" rx="19" fill="#00FFD1"/>
+</svg>
